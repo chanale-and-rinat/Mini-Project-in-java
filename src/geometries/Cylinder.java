@@ -14,7 +14,7 @@ public class Cylinder extends RadialGeometry
 {
 	@Override
 	public String toString() {
-		return "height=" + _height;
+		return "_height=" + _height;
 	}
 
 	/**
