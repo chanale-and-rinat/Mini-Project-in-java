@@ -23,7 +23,7 @@ public class TubeTests {
 	 */
 	@Test
 	public void testGetNormal() {
-		// =============== vectors will help us soon ==================
+		// =============== tubes will help us soon ==================
 		Tube t1 = new Tube(4,new Ray(new Point3D(0,0,0),new Vector(new Point3D(0,0,1))));
 		Tube t2 = new Tube(1,new Ray(new Point3D(1,1,1),new Vector(new Point3D(0,0,1))));
 		

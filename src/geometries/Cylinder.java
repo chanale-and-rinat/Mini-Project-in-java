@@ -5,6 +5,7 @@ package geometries;
 
 import primitives.Point3D;
 import primitives.Ray;
+import primitives.Util;
 import primitives.Vector;
 
 /**
@@ -34,6 +35,21 @@ public class Cylinder extends Tube
 
 	public Vector getNormal(Point3D _point)
 	{ 
+		Vector _direction=super.get_axisRay().get_direction().normalize();
+		Point3D _center=super.get_axisRay().get_p();
+		Plane _basic1=new Plane(_center,_direction);
+		Plane _basic2=new Plane(_center.add(_direction.scale(_height)),_direction);
+		//check if the point exist in plane basic1:
+		Vector _v=_point.subtract(_basic1._p);
+		if(Util.isZero(_v.dotProduct(_basic1._normal)))
+			//if the point exist on the basic1 plane- returns the normal to the plane
+			return _basic1._normal;
+		//check if the point exist in plane basic2:
+		_v=_point.subtract(_basic2._p);
+		if(Util.isZero(_v.dotProduct(_basic2._normal)))
+			//if the point exist on the basic2 plane- returns the normal to the plane
+			return _basic2._normal;
+		//if not exist in both basics- it's a sign that the point exist on the side of the cylinder
 		return super.getNormal(_point);
 	}
 	

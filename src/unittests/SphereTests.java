@@ -22,7 +22,7 @@ public class SphereTests {
 	 */
 	@Test
 	public void testGetNormal() {
-		// =============== vectors will help us soon ==================
+		// =============== spheres will help us soon ==================
 		    Sphere s1 = new Sphere(4, new Point3D(0,0,0));
 		    Sphere s2 = new Sphere(1, new Point3D(1,1,1));	
 		 // ============ Equivalence Partitions Tests ==============
