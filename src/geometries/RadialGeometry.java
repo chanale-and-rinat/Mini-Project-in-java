@@ -9,13 +9,6 @@ package geometries;
  */
 public abstract class RadialGeometry implements Geometry{
 
-	/**
-	 * @return the _radius
-	 */
-	public double get_radius() {
-		return _radius;
-	}
-
 	double _radius;
 
 	/**
@@ -33,6 +26,13 @@ public abstract class RadialGeometry implements Geometry{
 		super();
 		// TODO Auto-generated constructor stub
 		this._radius=_other.get_radius();	
+	}
+	
+	/**
+	 * @return the _radius
+	 */
+	public double get_radius() {
+		return _radius;
 	}
 	
 }

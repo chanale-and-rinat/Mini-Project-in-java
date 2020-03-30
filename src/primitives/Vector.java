@@ -19,6 +19,7 @@ public class Vector {
 			throw new IllegalArgumentException("the vector can't be the zero vector");
 		this._head = _headOther;
 	}
+	
 	/**
 	 * @param vector _other
 	 */
@@ -26,6 +27,7 @@ public class Vector {
 		super();
 		this._head = _other.get_head();
 	}
+	
 	/**
 	 * @param coordinate _x
 	 * @param coordinate _y
@@ -38,6 +40,7 @@ public class Vector {
 			throw new IllegalArgumentException("the vector can't be the zero vector");
 		this._head=new Point3D(_x,_y,_z);
 	}
+	
 	/**
 	 * @param double _x
 	 * * @param double _y
@@ -56,54 +59,74 @@ public class Vector {
 	public Point3D get_head() {
 		return _head;
 	}
+	
 	/**
-	 * @return  _other
+	 * @return  this vector minus the given one
 	 */
-public Vector subtract(Vector _other)
-{
-	return new Vector(this.get_head().subtract(_other.get_head()));
-}
-/**
- * @return _other
- */
-public Vector add(Vector _other)
-{
-	return new Vector(this.get_head().add(_other));
-}
-public Vector scale(double _scalar)
-{
-	return new Vector(this._head.get_x().get()*_scalar,this._head.get_y().get()*_scalar,this._head.get_z().get()*_scalar);
-}
-public double lengthSquared()
-{
-	return this.get_head().get_x().get()*this.get_head().get_x().get()+this.get_head().get_y().get()*this.get_head().get_y().get()+this.get_head().get_z().get()*this.get_head().get_z().get();
-}
-public double length()
-{
-	return Math.sqrt(this.lengthSquared());
-}
-public Vector normalize()
-{
-	double len=1/(this.length());
-	this._head=new Point3D(this.scale(len).get_head());
-	return this;
-}
-public Vector normalized()
-{
-	Vector newV=new Vector(this);
-	return newV.normalize();		
-}
-public double dotProduct(Vector _other)
-{
-	return this.get_head().get_x().get()*_other.get_head().get_x().get()+this.get_head().get_y().get()*_other.get_head().get_y().get()+this.get_head().get_z().get()*_other.get_head().get_z().get();
-}
-public Vector crossProduct(Vector _other)
-{
-	return (new Vector((this.get_head().get_y().get()*_other.get_head().get_z().get())-(this.get_head().get_z().get()*_other.get_head().get_y().get()),(this.get_head().get_z().get()*_other.get_head().get_x().get())-(this.get_head().get_x().get()*_other.get_head().get_z().get()),(this.get_head().get_x().get()*_other.get_head().get_y().get())-(this.get_head().get_y().get()*_other.get_head().get_x().get())));
-}
-	@Override
-	public String toString() {
-		return "head=" + _head;
+	public Vector subtract(Vector _other)
+	{
+		return new Vector(this.get_head().subtract(_other.get_head()));
+	}
+
+	/**
+	 * @return this vector plus the given one
+	 */
+	public Vector add(Vector _other)
+	{
+		return new Vector(this.get_head().add(_other));
+	}
+
+	/**
+	 * @return this vector mult with scalar
+	 */
+	public Vector scale(double _scalar)
+	{
+		return new Vector(this._head.get_x().get()*_scalar,this._head.get_y().get()*_scalar,this._head.get_z().get()*_scalar);
+	}
+	
+	/**
+	 * @return length of this vector by square
+	 */
+	public double lengthSquared()
+	{
+		return this.get_head().get_x().get()*this.get_head().get_x().get()+this.get_head().get_y().get()*this.get_head().get_y().get()+this.get_head().get_z().get()*this.get_head().get_z().get();
+	}
+	
+	/**
+	 * @return length of this vector
+	 */
+	public double length()
+	{
+		return Math.sqrt(this.lengthSquared());
+	}
+	
+	/**
+	 * normalize this vector and return it fixed
+	 */
+	public Vector normalize()
+	{
+		double len=1/(this.length());
+		this._head=new Point3D(this.scale(len).get_head());
+		return this;
+	}
+	
+	/**
+	 * @return normalize of this vector (without normalize it self) 
+	 */
+	public Vector normalized()
+	{
+		Vector newV=new Vector(this);
+		return newV.normalize();		
+	}
+	
+	public double dotProduct(Vector _other)
+	{
+		return this.get_head().get_x().get()*_other.get_head().get_x().get()+this.get_head().get_y().get()*_other.get_head().get_y().get()+this.get_head().get_z().get()*_other.get_head().get_z().get();
+	}
+	
+	public Vector crossProduct(Vector _other)
+	{
+		return (new Vector((this.get_head().get_y().get()*_other.get_head().get_z().get())-(this.get_head().get_z().get()*_other.get_head().get_y().get()),(this.get_head().get_z().get()*_other.get_head().get_x().get())-(this.get_head().get_x().get()*_other.get_head().get_z().get()),(this.get_head().get_x().get()*_other.get_head().get_y().get())-(this.get_head().get_y().get()*_other.get_head().get_x().get())));
 	}
 
 	@Override
@@ -123,5 +146,10 @@ public Vector crossProduct(Vector _other)
 		return true;
 	}
 	
+	@Override
+	public String toString() {
+		return "head=" + _head;
+	}
+
 
 }

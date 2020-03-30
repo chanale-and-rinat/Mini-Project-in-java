@@ -16,7 +16,6 @@ public class Triangle extends Polygon {
 	 */
 	public Triangle(Point3D _p1,Point3D _p2,Point3D _p3) {
 		super(_p1,_p2,_p3);
-		// TODO Auto-generated constructor stub
 	}
  
 }

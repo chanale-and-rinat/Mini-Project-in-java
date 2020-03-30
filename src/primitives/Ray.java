@@ -8,10 +8,19 @@ package primitives;
  *
  */
 public class Ray {
+	
 Point3D _p;
 Vector _direction;
 
-
+/**
+ * @param _p
+ * @param _direction
+ */
+public Ray(Point3D _p, Vector _direction) {
+	super();
+	this._p = _p;
+	this._direction = _direction.normalize();
+}
 
 /**
  * @return the _p
@@ -49,15 +58,6 @@ public boolean equals(Object obj) {
 	return true;
 }
 
-/**
- * @param _p
- * @param _direction
- */
-public Ray(Point3D _p, Vector _direction) {
-	super();
-	this._p = _p;
-	this._direction = _direction;
-}
 @Override
 public String toString() {
 	return "p=" + _p + ", direction=" + _direction;

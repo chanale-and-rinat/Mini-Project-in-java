@@ -14,11 +14,6 @@ public class Sphere extends RadialGeometry
 {
 	Point3D _center;
 	
-	public Vector getNormal(Point3D _point)
-	{
-		return null;
-	}
-
 	/**
 	 * @param _radius
 	 * @param _center
@@ -27,12 +22,7 @@ public class Sphere extends RadialGeometry
 		super(_radius);
 		this._center = _center;
 	}
-
-	@Override
-	public String toString() {
-		return "center=" + _center;
-	}
-
+	
 	/**
 	 * @return the _center
 	 */
@@ -40,5 +30,13 @@ public class Sphere extends RadialGeometry
 		return _center;
 	}
 
-	
+	public Vector getNormal(Point3D _point)
+	{
+		return (_point.subtract(this.get_center())).normalize();
+	}
+
+	@Override
+	public String toString() {
+		return "center=" + _center;
+	}	
 }

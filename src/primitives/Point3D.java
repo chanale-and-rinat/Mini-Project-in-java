@@ -10,6 +10,7 @@ public final static Point3D ZERO=new Point3D(0.0,0.0,0.0);
 Coordinate _x;
 Coordinate _y;
 Coordinate _z;
+
 /**
  * @param _x
  * @param _y
@@ -21,6 +22,7 @@ public Point3D(Coordinate _x, Coordinate _y, Coordinate _z) {
 	this._y = _y;
 	this._z = _z;
 }
+
 /**
  * @param point
  */
@@ -30,6 +32,7 @@ public Point3D(Point3D p) {
 	this._y = p.get_y();
 	this._z = p.get_z();
 }
+
 /**
  * @param _x
  * @param _y
@@ -38,24 +41,28 @@ public Point3D(Point3D p) {
 public Point3D(double _x, double _y, double _z) {
 	this(new Coordinate(_x),new Coordinate(_y),new Coordinate(_z));
 }
+
 /**
  * @return the _x
  */
 public Coordinate get_x() {
 	return new Coordinate(_x);
 }
+
 /**
  * @return the _y
  */
 public Coordinate get_y() {
 	return new Coordinate(_y);
 }
+
 /**
  * @return the _z
  */
 public Coordinate get_z() {
 	return new Coordinate(_z);
 }
+
 /**
  * @return the vector between this point to another
  */
@@ -63,6 +70,7 @@ public Vector subtract(Point3D _p)
 {
 	return new Vector(this.get_x().get()-_p.get_x().get(),this.get_y().get()-_p.get_y().get(),this.get_z().get()-_p.get_z().get());
 }
+
 /**
  * @return add vector to this point
  */
@@ -70,14 +78,23 @@ public Point3D add(Vector _v)
 {
 	return new Point3D(this.get_x().get()+_v.get_head().get_x().get(),this.get_y().get()+_v.get_head().get_y().get(),this.get_z().get()+_v.get_head().get_z().get());
 }
+
+/**
+ * @return distance square between this point and the given one
+ */
 public double	distanceSquare(Point3D _p) 
 {
 	return ((this.get_x().get()-_p.get_x().get())*(this.get_x().get()-_p.get_x().get()))+((this.get_y().get()-_p.get_y().get())*(this.get_y().get()-_p.get_y().get()))+((this.get_z().get()-_p.get_z().get())*(this.get_z().get()-_p.get_z().get()));
 }
+
+/**
+ * @return distance between this point and the given one
+ */
 public double	distance(Point3D _p) 
 {
 	return Math.sqrt(this.distanceSquare(_p));
 }
+
 @Override
 public boolean equals(Object obj) {
 	if (this == obj)
@@ -104,6 +121,7 @@ public boolean equals(Object obj) {
 		return false;
 	return true;
 }
+
 @Override
 public String toString() {
 	return "x=" + _x + ", y=" + _y + ", z=" + _z;
