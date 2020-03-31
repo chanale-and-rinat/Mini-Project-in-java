@@ -59,12 +59,11 @@ public class VectorTests {
 	        } catch (Exception e) {}
 	}
 	/**
-	 * Test to substract point from point
+	 * Test to substract vector from vector
 	 */
 	@Test
 	public void testSubtract() {
-		Point3D p1 = new Point3D(1, 2, 3); 
-		assertEquals("ERROR: Point - Point does not work correctly",new Vector(1, 1, 1),new Point3D(2, 3, 4).subtract(p1));
+		assertEquals("ERROR: Point - Point does not work correctly",new Vector(1, 1, 1),new Vector(2, 3, 4).subtract(v1));
 	}
 
 	/**
@@ -72,9 +71,8 @@ public class VectorTests {
 	 */
 	@Test
 	public void testAdd() {
-		// Test operations with points and vectors
-        Point3D p1 = new Point3D(1, 2, 3); 
-        assertEquals("ERROR: Point + Vector does not work correctly",Point3D.ZERO,p1.add(new Vector(-1, -2, -3)));
+		// Test operations with vectors
+        assertEquals("ERROR: Point + Vector does not work correctly",v1.add(v2),new Vector(-1, -2, -3));
 	}
 
 	/**
