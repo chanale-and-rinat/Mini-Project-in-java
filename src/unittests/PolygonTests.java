@@ -5,6 +5,8 @@ package unittests;
 
 import static org.junit.Assert.*;
 
+import java.util.List;
+
 import org.junit.Test;
 
 import geometries.*;
@@ -91,5 +93,54 @@ public class PolygonTests {
         double sqrt3 = Math.sqrt(1d / 3);
         assertEquals("Bad normal to trinagle", new Vector(sqrt3, sqrt3, sqrt3), pl.getNormal(new Point3D(0, 0, 1)));
     }
+    
+    /**
+     * Test method for {@link geometries.Sphere#findIntersections(primitives.Ray)}.
+     */
+    @Test
+    public void testFindIntersections() {
+    	//Plane _plane = new Plane(new Point3D(1,1,0),new Vector(0,1,0));
+        Polygon pl = new Polygon(new Point3D(0, 0, 0), new Point3D(0, 3, 0),new Point3D(6,3,0), new Point3D(5,0,0));
+        // ============ Equivalence Partitions Tests ==============
+
+       // TC01: Ray intersects the polygon (1 points)
+        assertEquals("Ray intersects the polygon",List.of( new Point3D(1,1,0)),
+        		pl.findIntersections(new Ray(new Point3D(0,0,-1), new Vector(1, 1, 1))));
+      
+    // TC02: Ray does not intersect the polygon (0 points)
+        assertEquals("Ray does not intersect the polygon",null,
+        		pl.findIntersections(new Ray(new Point3D(10,10,10), new Vector(1, 1, 0))));
+
+        
+        // =============== Boundary Values Tests ==================
+
+        // **** Group: Ray is parallel to the polygon
+        // TC11: Ray included (0 points)
+         assertEquals("Ray included",null,
+        		pl.findIntersections(new Ray(new Point3D(0,0,0), new Vector(0, 1, 0))));
+         // TC12: Ray not included in the polygon(0 points)
+        assertEquals("Ray not included in the polygon",null,
+        		pl.findIntersections(new Ray(new Point3D(0,0,-1), new Vector(0,1, 0))));
+        
+        // **** Group: Ray is orthogonal to the polygon
+        // TC13: Ray starts before the polygon (1 points)
+        assertEquals("Ray starts before the polygon", List.of(new Point3D(1,1,0)),
+        		pl.findIntersections(new Ray(new Point3D(1,1,-1), new Vector(0,0,1))));
+        // TC14: Ray starts in the polygon (0 points)
+        assertEquals("Ray starts in the polygon", null,
+        		pl.findIntersections(new Ray(new Point3D(1,1,0), new Vector(0,0,1))));
+        // TC15: Ray starts after the polygon (0 points)
+        assertEquals("Ray starts after the polygon", null,
+        		pl.findIntersections(new Ray(new Point3D(1,1,1), new Vector(0,0,1))));
+     
+        // **** Group: Ray is neither orthogonal nor parallel
+        // TC16: Ray starts at the polygon (0 points)
+        assertEquals("Ray starts at the polygon", null,
+        		pl.findIntersections(new Ray(new Point3D(1,1,0), new Vector(1,1, 0))));
+     // TC17: Ray intersects the polygon in vertex (0 points)
+        assertEquals("Ray intersects the polygon",/*List.of( new Point3D(1,1,0))*/null,
+        		pl.findIntersections(new Ray(new Point3D(0, 0, 0), new Vector(1, 1, 0))));
+    }
+    
 
 }

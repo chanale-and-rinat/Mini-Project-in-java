@@ -11,7 +11,7 @@ import primitives.Vector;
  * @author ψημι
  *
  */
-public interface Geometry {
+public interface Geometry extends Intersectable{
 	
 	public Vector getNormal(Point3D _p);
 

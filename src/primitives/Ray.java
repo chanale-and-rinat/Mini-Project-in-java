@@ -2,6 +2,7 @@
  * 
  */
 package primitives;
+import static primitives.Util.*;
 
 /**
  * @author ψημι
@@ -20,6 +21,15 @@ public Ray(Point3D _p, Vector _direction) {
 	super();
 	this._p = _p;
 	this._direction = _direction.normalize();
+}
+
+/**
+ * @author  c&r
+ * @param length
+ * @return new Point3D
+ */
+public Point3D getTargetPoint(double length) {
+       return isZero(length ) ? _p : _p.add(_direction.scale(length));
 }
 
 /**
