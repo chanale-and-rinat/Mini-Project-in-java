@@ -137,7 +137,7 @@ public class PolygonTests {
         // TC16: Ray starts at the polygon (0 points)
         assertEquals("Ray starts at the polygon", null,
         		pl.findIntersections(new Ray(new Point3D(1,1,0), new Vector(1,1, 0))));
-     // TC17: Ray intersects the polygon in vertex (0 points)
+        // TC17: Ray intersects the polygon in vertex (0 points)
         assertEquals("Ray intersects the polygon",/*List.of( new Point3D(1,1,0))*/null,
         		pl.findIntersections(new Ray(new Point3D(0, 0, 0), new Vector(1, 1, 0))));
     }
