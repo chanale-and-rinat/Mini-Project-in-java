@@ -10,7 +10,7 @@ import primitives.*;
  * @author ψημι
  *
  */
-public class Plane implements Geometry{
+public class Plane extends Geometry{
 	
 Point3D _p;
 Vector _normal;
@@ -23,6 +23,27 @@ public Plane(Point3D _p, Vector _normal) {
 	super();
 	this._p = _p;
 	this._normal = _normal;
+}
+/**
+ * @param color
+ * @param material
+ * @param 3 point3D
+ */
+public Plane(Color emissionLight, Material material, Point3D _p1, Point3D _p2, Point3D _p3) {
+    super(emissionLight, material);
+
+    _p = new Point3D(_p1);
+	Vector _v1=_p2.subtract(_p1);
+	Vector _v2=_p3.subtract(_p2);
+	this._normal = new Vector(_v1.crossProduct(_v2).normalize());
+
+}
+/**
+ * @param color
+ * @param 3 point3D
+ */
+public Plane(Color emissionLight, Point3D p1, Point3D p2, Point3D p3) {
+    this(emissionLight, new Material(0, 0, 0), p1, p2, p3);
 }
 
 /**
@@ -50,8 +71,9 @@ public Vector getNormal(Point3D _p) {
 	return _normal;
 }
 
+
 @Override
-public List<Point3D> findIntersections(Ray ray) {
+public List<GeoPoint> findIntersections(Ray ray) {
     Vector p0Q;
     try {
         p0Q = _p.subtract(ray.get_p());
@@ -65,6 +87,11 @@ public List<Point3D> findIntersections(Ray ray) {
 
     double t = alignZero(_normal.dotProduct(p0Q) / nv);
 
-    return t <= 0 ? null : List.of(ray.getTargetPoint(t));
+    if (t <= 0) {
+        return null;
+    }
+
+    GeoPoint geo = new GeoPoint(this, ray.getTargetPoint(t));
+    return List.of(geo);
 }
 }

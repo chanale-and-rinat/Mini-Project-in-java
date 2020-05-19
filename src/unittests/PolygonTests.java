@@ -5,11 +5,13 @@ package unittests;
 
 import static org.junit.Assert.*;
 
+import java.util.LinkedList;
 import java.util.List;
 
 import org.junit.Test;
 
 import geometries.*;
+import geometries.Intersectable.GeoPoint;
 import primitives.*;
 
 /**
@@ -101,11 +103,17 @@ public class PolygonTests {
     public void testFindIntersections() {
     	//Plane _plane = new Plane(new Point3D(1,1,0),new Vector(0,1,0));
         Polygon pl = new Polygon(new Point3D(0, 0, 0), new Point3D(0, 3, 0),new Point3D(6,3,0), new Point3D(5,0,0));
+        List<Point3D> points = new LinkedList<>();
+
         // ============ Equivalence Partitions Tests ==============
 
        // TC01: Ray intersects the polygon (1 points)
-        assertEquals("Ray intersects the polygon",List.of( new Point3D(1,1,0)),
-        		pl.findIntersections(new Ray(new Point3D(0,0,-1), new Vector(1, 1, 1))));
+        points.clear();
+		for( GeoPoint g: pl.findIntersections(new Ray(new Point3D(0,0,-1), new Vector(1, 1, 1)))) {
+			points.add(g.getPoint());
+		}
+        assertEquals("Ray intersects the polygon",List.of(new Point3D(1,1,0)),
+        		points);
       
     // TC02: Ray does not intersect the polygon (0 points)
         assertEquals("Ray does not intersect the polygon",null,
@@ -124,8 +132,12 @@ public class PolygonTests {
         
         // **** Group: Ray is orthogonal to the polygon
         // TC13: Ray starts before the polygon (1 points)
+        points.clear();
+		for( GeoPoint g: pl.findIntersections(new Ray(new Point3D(1,1,-1), new Vector(0,0,1)))) {
+			points.add(g.getPoint());
+		}
         assertEquals("Ray starts before the polygon", List.of(new Point3D(1,1,0)),
-        		pl.findIntersections(new Ray(new Point3D(1,1,-1), new Vector(0,0,1))));
+        		points);
         // TC14: Ray starts in the polygon (0 points)
         assertEquals("Ray starts in the polygon", null,
         		pl.findIntersections(new Ray(new Point3D(1,1,0), new Vector(0,0,1))));

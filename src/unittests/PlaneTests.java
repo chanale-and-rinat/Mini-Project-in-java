@@ -5,11 +5,13 @@ package unittests;
 
 import static org.junit.Assert.*;
 
+import java.util.LinkedList;
 import java.util.List;
 
 import org.junit.Test;
 
 import geometries.*;
+import geometries.Intersectable.GeoPoint;
 import primitives.*;
 /**
  * @author chanale & rinat
@@ -47,12 +49,17 @@ public class PlaneTests {
     @Test
     public void testFindIntersections() {
         Plane _plane = new Plane(new Point3D(1,1,0),new Vector(0,1,0));
+        List<Point3D> points = new LinkedList<>();
 
         // ============ Equivalence Partitions Tests ==============
 
         // TC01: Ray intersects the plane (1 points)
+        points.clear();
+        for(GeoPoint g:_plane.findIntersections(new Ray(new Point3D(0, 0, 0), new Vector(1, 1, 0)))) {
+			points.add(g.getPoint());
+		}
         assertEquals("Ray intersects the plane",List.of( new Point3D(1,1,0)),
-        		_plane.findIntersections(new Ray(new Point3D(0, 0, 0), new Vector(1, 1, 0))));
+        		points);
 
         // TC02: Ray does not intersect the plane (0 points)
         assertEquals("Ray does not intersect the plane",null,
@@ -71,8 +78,12 @@ public class PlaneTests {
         
         // **** Group: Ray is orthogonal to the plane
         // TC13: Ray starts before the plane (1 points)
+        points.clear();
+        for(GeoPoint g:_plane.findIntersections(new Ray(new Point3D(0,0,0), new Vector(0,1,0)))) {
+			points.add(g.getPoint());
+		}
         assertEquals("Ray starts before the plane", List.of(new Point3D(0,1,0)),
-        		_plane.findIntersections(new Ray(new Point3D(0,0,0), new Vector(0,1,0))));
+        		points);
         // TC14: Ray starts in the plane (0 points)
         assertEquals("Ray starts in the plane", null,
         		_plane.findIntersections(new Ray(new Point3D(0,1,0), new Vector(0,1,0))));

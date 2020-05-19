@@ -14,7 +14,29 @@ import primitives.*;
 public class Tube extends RadialGeometry {
 	
 	Ray _axisRay;
+	/**
+     * constructor for a new Cylinder object
+     *
+     * @param _radius       the radius of the tube
+     * @param _ray          the direction of the tube from the referenced point
+     * @param _material     the material of the tube
+     * @param emissionLight the emission light of the tube
+     * @throws Exception in case of negative or zero radius from RadialGeometry constructor
+     */
+    public Tube(Color emissionLight, Material _material, double _radius, Ray _ray) {
+        super(Color.BLACK, _radius);
+        this._material = _material;
+        this._axisRay = _ray;
 
+    }
+    /**
+     * @param COLOR
+	 * @param _radius
+	 * @param _axisRay
+	 */
+    public Tube(Color emissionLight, double _radius, Ray _ray) {
+        this(emissionLight, new Material(0, 0, 0), _radius, _ray);
+    }
 	/**
 	 * @param _radius
 	 * @param _axisRay
@@ -53,7 +75,7 @@ public class Tube extends RadialGeometry {
 	  * @return A list of intersection points, if any.
 	  */
 	  @Override
-	 public List<Point3D> findIntersections(Ray ray) {
+	 public List<GeoPoint> findIntersections(Ray ray) {
 		  return null;
 	  }
 		  /*List<Point3D> toReturn = new List<Point3D>();

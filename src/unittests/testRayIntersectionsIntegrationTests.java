@@ -11,6 +11,7 @@ import org.junit.Test;
 
 import elements.*;
 import geometries.*;
+import geometries.Intersectable.GeoPoint;
 import primitives.*;
 
 /**
@@ -26,7 +27,7 @@ public class testRayIntersectionsIntegrationTests {
 		Camera cam1=new Camera(Point3D.ZERO,new Vector(0,0,1),new Vector(0,-1,0));
 		Camera cam2=new Camera(new Point3D(0,0,-0.5),new Vector(0,0,1),new Vector(0,-1,0));
 		Sphere sphere;
-		List<Point3D> intersactions;
+		List<GeoPoint> intersactions;
 		int count;
 		
 		//TC01: small sphere 2 points
@@ -94,7 +95,7 @@ public class testRayIntersectionsIntegrationTests {
 	{
 		Camera cam=new Camera(Point3D.ZERO,new Vector(0,0,1),new Vector(0,-1,0));
 		Plane plane;
-		List<Point3D> intersactions;
+		List<GeoPoint> intersactions;
 		int count;
 		
 		//TC01: the plane parallel to the view plane, 9 intersaction points
@@ -139,7 +140,7 @@ public class testRayIntersectionsIntegrationTests {
 	{
 		Camera cam=new Camera(Point3D.ZERO,new Vector(0,0,1),new Vector(0,-1,0));
 		Triangle triangle;
-		List<Point3D> intersactions;
+		List<GeoPoint> intersactions;
 		int count;
 		
 		//TC01: the small triangle parallel to the view plane,1 intersaction points

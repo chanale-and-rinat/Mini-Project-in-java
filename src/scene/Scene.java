@@ -2,6 +2,9 @@
  * 
  */
 package scene;
+//import java.awt.Color;
+import java.util.LinkedList;
+import java.util.List;
 
 import elements.*;
 import geometries.*;
@@ -18,7 +21,15 @@ public class Scene {
 	Geometries _geometries;
 	Camera _camera;
 	double _distance;
+	private List<LightSource> _lights = new LinkedList<LightSource>();
 	
+	/**
+	 * @return the _lights
+	 */
+	public List<LightSource> get_lights() {
+		return _lights;
+	}
+
 	/**
 	 * @param _name
 	 */
@@ -101,5 +112,10 @@ public class Scene {
 	{
 		_geometries.add(geometries);
 	}
-	
+    public void addLights(LightSource light) {
+        if (_lights == null) {
+            _lights = new LinkedList<>();
+        }
+        _lights.add(light);
+    }
 }

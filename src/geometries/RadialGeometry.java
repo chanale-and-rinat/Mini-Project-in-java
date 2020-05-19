@@ -3,14 +3,31 @@
  */
 package geometries;
 
+import primitives.*;
+
 /**
  * @author ψημι
  *
  */
-public abstract class RadialGeometry implements Geometry{
+public abstract class RadialGeometry extends Geometry{
 
 	double _radius;
+    /**
+     * constructor for a new extended  RadialGeometry object.
+     *
+     * @param radius   the radius of the RadialGeometry
+     * @param material the material of the RadialGeometry
+     * @throws Exception in case of negative or zero radius
+     */
+    public RadialGeometry(Color emissionLight, double radius, Material material) {
+        super(emissionLight, material);
+        _radius=radius;
+    }
 
+    public RadialGeometry(Color emissionLight, double radius) {
+        super(emissionLight);
+        _radius=radius;
+    }
 	/**
 	 * @param _radius
 	 */
