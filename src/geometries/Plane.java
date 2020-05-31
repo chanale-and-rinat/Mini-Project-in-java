@@ -38,6 +38,12 @@ public Plane(Color emissionLight, Material material, Point3D _p1, Point3D _p2, P
 	this._normal = new Vector(_v1.crossProduct(_v2).normalize());
 
 }
+public Plane(Color emissionLight, Material material, Point3D _p, Vector _normal) {
+    super(emissionLight, material);
+    this._p = _p;
+	this._normal = _normal;
+
+}
 /**
  * @param color
  * @param 3 point3D
