@@ -24,7 +24,9 @@ public class Sphere extends RadialGeometry
      */
 
     public Sphere(Color emissionLight, Material material, double radius, Point3D center) {
-        super(emissionLight, radius, material);
+        super(emissionLight, radius, material,    	
+        	new Box(center.get_x().get()-radius,center.get_x().get()+radius,center.get_y().get()-radius,
+        			center.get_y().get()+radius,center.get_z().get()-radius,center.get_z().get()+radius));
         this._center = new Point3D(center);
     }
 
@@ -35,9 +37,11 @@ public class Sphere extends RadialGeometry
 	 * @param _radius
 	 * @param _center
 	 */
-	public Sphere(double _radius, Point3D _center) {
-		super(_radius);
-		this._center = _center;
+	public Sphere(double radius, Point3D center) {
+		super(radius ,  	
+	        	new Box(center.get_x().get()-radius,center.get_x().get()+radius,center.get_y().get()-radius,
+	        			center.get_y().get()+radius,center.get_z().get()-radius,center.get_z().get()+radius));
+		this._center = center;
 	}
 	
 	/**
@@ -59,6 +63,10 @@ public class Sphere extends RadialGeometry
 	
 	@Override
     public List<GeoPoint> findIntersections(Ray ray) {
+		if(!IsIntersectionBox(ray))
+    	{
+    		return null;
+    	}
         Point3D p0 = ray.get_p();
         Vector v = ray.get_direction();
         Vector u;
@@ -78,15 +86,21 @@ public class Sphere extends RadialGeometry
 
         double t1 = alignZero(tm - th);
         double t2 = alignZero(tm + th);
-        if (t1 <= 0 && t2 <= 0) return null;
-        if (t1 > 0 && t2 > 0) {
+        if (alignZero(t1) <= 0 && alignZero(t2) <= 0) return null;
+        if (alignZero(t1) > 0 && alignZero(t2) > 0) {
             return List.of(
                     new GeoPoint(this,(ray.getTargetPoint(t1)))
                     ,new GeoPoint(this,(ray.getTargetPoint(t2)))); //P1 , P2
         }
-        if (t1 > 0)
+        if (alignZero(t1) > 0)
             return List.of(new GeoPoint(this,(ray.getTargetPoint(t1))));
         else
             return List.of(new GeoPoint(this,(ray.getTargetPoint(t2))));
     }
+
+	@Override
+	public boolean IsIntersectionBox(Ray ray) {
+		return this._box.IntersectionBox(ray);
+	}
+	 
 }

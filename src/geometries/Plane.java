@@ -20,7 +20,8 @@ Vector _normal;
  * @param _normal
  */
 public Plane(Point3D _p, Vector _normal) {
-	super();
+	super(new Box(Double.NEGATIVE_INFINITY,Double.POSITIVE_INFINITY,Double.NEGATIVE_INFINITY,
+			Double.POSITIVE_INFINITY,Double.NEGATIVE_INFINITY,Double.POSITIVE_INFINITY));
 	this._p = _p;
 	this._normal = _normal;
 }
@@ -30,7 +31,9 @@ public Plane(Point3D _p, Vector _normal) {
  * @param 3 point3D
  */
 public Plane(Color emissionLight, Material material, Point3D _p1, Point3D _p2, Point3D _p3) {
-    super(emissionLight, material);
+    super(emissionLight, material,
+    		new Box(Double.NEGATIVE_INFINITY,Double.POSITIVE_INFINITY,Double.NEGATIVE_INFINITY,
+    				Double.POSITIVE_INFINITY,Double.NEGATIVE_INFINITY,Double.POSITIVE_INFINITY));
 
     _p = new Point3D(_p1);
 	Vector _v1=_p2.subtract(_p1);
@@ -39,7 +42,9 @@ public Plane(Color emissionLight, Material material, Point3D _p1, Point3D _p2, P
 
 }
 public Plane(Color emissionLight, Material material, Point3D _p, Vector _normal) {
-    super(emissionLight, material);
+    super(emissionLight, material,
+    		new Box(Double.NEGATIVE_INFINITY,Double.POSITIVE_INFINITY,Double.NEGATIVE_INFINITY,
+    				Double.POSITIVE_INFINITY,Double.NEGATIVE_INFINITY,Double.POSITIVE_INFINITY));
     this._p = _p;
 	this._normal = _normal;
 
@@ -59,7 +64,7 @@ public Plane(Color emissionLight, Point3D p1, Point3D p2, Point3D p3) {
  */
 public Plane(Point3D _p1, Point3D _p2,Point3D _p3) {
 	
-	super();
+	super(new Box(Double.NEGATIVE_INFINITY,Double.POSITIVE_INFINITY,Double.NEGATIVE_INFINITY,Double.POSITIVE_INFINITY,Double.NEGATIVE_INFINITY,Double.POSITIVE_INFINITY));
 	try {
 	this._p = _p1;
 	Vector _v1=_p2.subtract(_p1);
@@ -80,6 +85,10 @@ public Vector getNormal(Point3D _p) {
 
 @Override
 public List<GeoPoint> findIntersections(Ray ray) {
+	if(!IsIntersectionBox(ray))
+	{
+		return null;
+	}
     Vector p0Q;
     try {
         p0Q = _p.subtract(ray.get_p());
@@ -99,5 +108,9 @@ public List<GeoPoint> findIntersections(Ray ray) {
 
     GeoPoint geo = new GeoPoint(this, ray.getTargetPoint(t));
     return List.of(geo);
+}
+@Override
+public boolean IsIntersectionBox(Ray ray) {
+	return this._box.IntersectionBox(ray);
 }
 }

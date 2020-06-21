@@ -38,12 +38,12 @@ public class ReflectionRefractionTests {
 						new Point3D(0, 0, 50)),
 				new Sphere(new Color(java.awt.Color.RED), new Material(0.5, 0.5, 100), 25, new Point3D(0, 0, 50)));
 		scene.addLights(new SpotLight(new Color(1000, 600, 0), new Point3D(-100, 100, -500), new Vector(-1, 1, 2), 1,
-				0.0004, 0.0000006));
+				0.0004, 0.0000006,1,8));
 
-		ImageWriter imageWriter = new ImageWriter("twoSpheres", 150, 150, 500, 500);
+		ImageWriter imageWriter = new ImageWriter("twoSpheres with implement", 150, 150, 500, 500);
 		render render = new render(imageWriter, scene);
 
-		render.renderImage();
+		render.renderImage(81);
 		render.writeToImage();
 	}
 
@@ -128,6 +128,34 @@ public class ReflectionRefractionTests {
 				   new Vector(-1, 1, 4), 1, 0.00001, 0.000005));
 
 		ImageWriter imageWriter = new ImageWriter("our own picture", 2500, 2500, 500, 500);
+		render render = new render(imageWriter, scene);
+
+		render.renderImage();
+		render.writeToImage();
+	}
+	
+	/**
+	 * we create our own picture
+	 */
+	@Test
+	public void ourTest2() {
+		Scene scene = new Scene("Test scene");
+		scene.set_camera(new Camera(new Point3D(0, 0, -10000), new Vector(0, 0, 1), new Vector(0, -1, 0)));
+		scene.set_distance(10000);
+		scene.set_background(Color.BLACK);
+		scene.set_ambientLight(new AmbientLight(new Color(100,100,100), 0.1));
+
+		scene.addGeometries(
+				new Sphere(new Color(100,0, 00), new Material(0.25, 0.25, 20, 0.6, 0.5), 1000, new Point3D(0,0,300)),
+				new Sphere(new Color(0, 100, 0), new Material(0.25, 0.25, 20, 0, 0), 500, new Point3D(1200,1200,0)),
+				new Sphere(new Color(0, 100, 0), new Material(0.25, 0.25, 20, 0, 0), 500, new Point3D(1200,-1200,0)),
+				new Sphere(new Color(0, 100, 0), new Material(0.25, 0.25, 20, 0, 0), 500, new Point3D(-1200,-1200,0)),
+				new Sphere(new Color(0, 100, 0), new Material(0.25, 0.25, 20, 0, 0), 500, new Point3D(-1200,1200,0))
+					);
+
+		scene.addLights(new DirectionalLight(new Color(500, 300, 0), new Vector(1, -1, 1)));
+
+		ImageWriter imageWriter = new ImageWriter("our own picture 2", 2500, 2500, 500, 500);
 		render render = new render(imageWriter, scene);
 
 		render.renderImage();

@@ -9,6 +9,7 @@ import primitives.*;
  * @author rinat
  */
 public interface LightSource  {
+	
     /**
      * Get light source intensity as it reaches a point I<sub>P</sub>
      *
@@ -25,5 +26,7 @@ public interface LightSource  {
      * @return light to point vector
      */
     Vector getL(Point3D p);
+    double getRadius();
+    void setRadius(double d);
     double getDistance(Point3D point);
 }

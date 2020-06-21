@@ -19,20 +19,20 @@ public abstract class RadialGeometry extends Geometry{
      * @param material the material of the RadialGeometry
      * @throws Exception in case of negative or zero radius
      */
-    public RadialGeometry(Color emissionLight, double radius, Material material) {
-        super(emissionLight, material);
+    public RadialGeometry(Color emissionLight, double radius, Material material,Box box) {
+        super(emissionLight, material,box);
         _radius=radius;
     }
 
-    public RadialGeometry(Color emissionLight, double radius) {
-        super(emissionLight);
+    public RadialGeometry(Color emissionLight, double radius,Box box) {
+        super(emissionLight,box);
         _radius=radius;
     }
 	/**
 	 * @param _radius
 	 */
-	public RadialGeometry(double _radius) {
-		super();
+	public RadialGeometry(double _radius,Box box) {
+		super(box);
 		this._radius = _radius;
 	}
 
@@ -40,7 +40,7 @@ public abstract class RadialGeometry extends Geometry{
 	 * @param _other
 	 */
 	public RadialGeometry(RadialGeometry _other) {
-		super();
+		super(_other.get_box());
 		// TODO Auto-generated constructor stub
 		this._radius=_other.get_radius();	
 	}

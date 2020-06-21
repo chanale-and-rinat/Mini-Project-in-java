@@ -24,7 +24,7 @@ public class Tube extends RadialGeometry {
      * @throws Exception in case of negative or zero radius from RadialGeometry constructor
      */
     public Tube(Color emissionLight, Material _material, double _radius, Ray _ray) {
-        super(Color.BLACK, _radius);
+        super(Color.BLACK, _radius,null);
         this._material = _material;
         this._axisRay = _ray;
 
@@ -42,7 +42,7 @@ public class Tube extends RadialGeometry {
 	 * @param _axisRay
 	 */
 	public Tube(double _radius, Ray _axisRay) {
-		super(_radius);
+		super(_radius,null);
 		this._axisRay = _axisRay;
 	}
 
@@ -129,4 +129,9 @@ public class Tube extends RadialGeometry {
 	   }
 	 }þ
 */
+	@Override
+	public boolean IsIntersectionBox(Ray ray) {
+		// TODO Auto-generated method stub
+		return true;
+	}
 }

@@ -38,6 +38,10 @@ public class Triangle extends Polygon {
 	
 	@Override
     public List<GeoPoint> findIntersections(Ray ray) {
+		if(!IsIntersectionBox(ray))
+    	{
+    		return null;
+    	}
         List<GeoPoint> planeIntersections = _plane.findIntersections(ray);
         if (planeIntersections == null) return null;
 
@@ -67,5 +71,6 @@ public class Triangle extends Polygon {
         return null;
 
     }
+	
  
 }

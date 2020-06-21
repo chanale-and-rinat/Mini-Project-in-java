@@ -44,7 +44,13 @@ public Ray(Point3D point, Vector direction, Vector normal) {
  * @return new Point3D
  */
 public Point3D getTargetPoint(double length) {
-       return isZero(length ) ? _p : _p.add(_direction.scale(length));
+	try {
+		return _p.add(_direction.scale(length));
+	}
+	catch(Exception ex) {
+		return _p ;
+	}
+       
 }
 
 /**
