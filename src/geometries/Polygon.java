@@ -162,4 +162,8 @@ public class Polygon extends Geometry {
 	public boolean IsIntersectionBox(Ray ray) {
 		return this._box.IntersectionBox(ray);
 	}
+	@Override
+	public Point3D getPositionPoint() {
+		return _vertices.get(0);
+	}
 }

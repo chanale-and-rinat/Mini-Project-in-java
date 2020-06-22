@@ -102,5 +102,10 @@ public class Sphere extends RadialGeometry
 	public boolean IsIntersectionBox(Ray ray) {
 		return this._box.IntersectionBox(ray);
 	}
+
+	@Override
+	public Point3D getPositionPoint() {
+		return this._center;
+	}
 	 
 }

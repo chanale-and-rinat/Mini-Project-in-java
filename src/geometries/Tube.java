@@ -134,4 +134,8 @@ public class Tube extends RadialGeometry {
 		// TODO Auto-generated method stub
 		return true;
 	}
+	@Override
+	public Point3D getPositionPoint() {
+		return this.get_axisRay().get_p();
+	}
 }
